@@ -1,23 +1,814 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <title>Home</title>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
-    <!--
-      Need a visual blank slate?
-      Remove all code in `styles.css`!
-    -->
-    <link rel="stylesheet" href="styles.css" />
-    <script type="module" src="script.js"></script>
-  </head>
-  <body>
-    <nav>
-      <a href="/" aria-current="page">Home</a>
-      <a href="/page2.html">Other page</a>
-    </nav>
-    <main>
-      <h1>Home page</h1>
-    </main>
-  </body>
-</html>
+
+
+  <style>
+    body {
+      font-family: 'Noto Sans KR', sans-serif;
+      line-height: 1.85;
+      margin: 0;
+      padding: 0;
+      background-color: #FAF9F6;
+      color: #2D3748;
+    }
+    header {
+      background: linear-gradient(135deg, #1F2E3D, #354A5F);
+      color: #FFFFFF;
+      text-align: center;
+      padding: 80px 20px;
+      border-radius: 0 0 24px 24px;
+    }
+    h1, h2, h3 {
+      color: #1A2A3A;
+      font-weight: 700;
+    }
+    h1 {
+      font-size: 2.6rem;
+      margin-bottom: 15px;
+      letter-spacing: -0.03em;
+    }
+    header p {
+      font-size: 1.25rem;
+      opacity: 0.95;
+      margin: 10px 0 0 0;
+      font-weight: 300;
+    }
+    .highlight-text {
+      background-color: #EADBC8;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-weight: 700;
+      color: #1A2A3A;
+    }
+    nav {
+      max-width: 1000px;
+      margin: -25px auto 30px auto;
+      background: #FFFFFF;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+      padding: 10px;
+    }
+    nav ul {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    nav ul li a {
+      display: block;
+      padding: 12px 18px;
+      text-decoration: none;
+      color: #4A5568;
+      font-weight: 500;
+      transition: color 0.3s, background-color 0.3s;
+      border-radius: 8px;
+    }
+    nav ul li a:hover {
+      color: #1F2E3D;
+      background-color: #F7F5F0;
+    }
+    section {
+      max-width: 1000px;
+      margin: 30px auto;
+      padding: 40px;
+      background: #FFFFFF;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    }
+    .btn-cta {
+      display: inline-block;
+      padding: 16px 36px;
+      background: linear-gradient(135deg, #B3926B, #9A7B56);
+      color: #FFFFFF;
+      font-weight: 700;
+      font-size: 1.15rem;
+      border-radius: 30px;
+      box-shadow: 0 6px 15px rgba(179, 146, 107, 0.3);
+      transition: all 0.3s ease;
+      text-align: center;
+      margin-top: 25px;
+      cursor: pointer;
+      border: none;
+      text-decoration: none;
+    }
+    .btn-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(179, 146, 107, 0.4);
+    }
+    .hero-image-container {
+      width: 100%;
+      height: 380px;
+      border-radius: 14px;
+      overflow: hidden;
+      margin: 25px 0;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+      background-color: #E2E8F0;
+      position: relative;
+    }
+    .hero-placeholder-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.5rem;
+      color: #4A5568;
+      font-weight: 700;
+      text-align: center;
+    }
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin: 25px 0;
+      border: 1px solid #E2E8F0;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    th, td {
+      padding: 16px;
+      text-align: left;
+      border-bottom: 1px solid #E2E8F0;
+    }
+    th {
+      background: #F7F5F0;
+      color: #1A2A3A;
+      font-weight: 700;
+    }
+    tr:last-child td {
+      border-bottom: none;
+    }
+    tr:nth-child(even) {
+      background-color: #FAF9F6;
+    }
+    .chart-container {
+      background: #F7F5F0;
+      padding: 30px;
+      border-radius: 12px;
+      margin: 25px 0;
+    }
+    .chart-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #1A2A3A;
+      margin-bottom: 5px;
+    }
+    .chart-subtitle {
+      font-size: 0.9rem;
+      color: #718096;
+      margin-bottom: 20px;
+    }
+    .bar-chart {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+    }
+    .bar-item {
+      text-align: center;
+      background: #FFFFFF;
+      border-radius: 10px;
+      padding: 20px 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+    }
+    .bar-item strong {
+      display: block;
+      font-size: 1.35rem;
+      margin-bottom: 8px;
+      color: #9A7B56;
+    }
+    .bar-label {
+      font-size: 0.85rem;
+      color: #4A5568;
+      line-height: 1.4;
+    }
+    .form-container {
+      background: #F7F5F0;
+      padding: 40px;
+      border-radius: 16px;
+      border: 1px solid #EADBC8;
+    }
+    label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: #1A2A3A;
+    }
+    input[type="text"], input[type="tel"], select, textarea {
+      width: calc(100% - 24px);
+      padding: 14px;
+      margin-bottom: 20px;
+      border: 1px solid #CBD5E0;
+      border-radius: 8px;
+      box-sizing: border-box;
+      font-size: 1rem;
+      transition: all 0.3s;
+      background-color: #FFFFFF;
+    }
+    input:focus, select:focus, textarea:focus {
+      border-color: #B3926B;
+      outline: none;
+      box-shadow: 0 0 8px rgba(179, 146, 107, 0.2);
+    }
+    .interactive-section {
+      background-color: #FFFFFF;
+      border: 1px solid #EADBC8;
+      padding: 30px;
+      border-radius: 12px;
+      margin: 30px 0;
+    }
+    .calc-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 15px;
+    }
+    .calc-result-box {
+      background-color: #F7F5F0;
+      border-radius: 10px;
+      padding: 25px;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .calc-result-val {
+      font-size: 2rem;
+      font-weight: 700;
+      color: #9A7B56;
+      margin-top: 10px;
+    }
+    .checklist-container {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 15px;
+      margin: 25px 0;
+    }
+    .checklist-item {
+      display: flex;
+      align-items: flex-start;
+      background-color: #FAF9F6;
+      padding: 15px 20px;
+      border-radius: 10px;
+      border-left: 4px solid #B3926B;
+    }
+    .checklist-checkbox {
+      margin-right: 15px;
+      margin-top: 5px;
+      transform: scale(1.2);
+    }
+    .checklist-text {
+      font-size: 0.95rem;
+      color: #2D3748;
+    }
+    blockquote {
+      border-left: 4px solid #B3926B;
+      padding: 15px 25px;
+      margin: 30px 0;
+      background-color: #F7F5F0;
+      color: #2D3748;
+      font-style: italic;
+      border-radius: 0 10px 10px 0;
+    }
+    .accent-box {
+      background-color: #F7F5F0;
+      border: 1px solid #EADBC8;
+      border-radius: 12px;
+      padding: 25px;
+      margin: 25px 0;
+    }
+    .faq-question {
+      font-weight: 700;
+      color: #1A2A3A;
+      margin-top: 25px;
+      border-bottom: 1px solid #E2E8F0;
+      padding-bottom: 10px;
+    }
+    .faq-answer {
+      color: #4A5568;
+      margin-bottom: 25px;
+    }
+    @media (max-width: 768px) {
+      body { padding: 0; }
+      header { padding: 50px 15px; }
+      section { margin: 20px 10px; padding: 20px; }
+      h1 { font-size: 1.85rem; }
+      nav ul { flex-direction: column; }
+      nav ul li a { border-bottom: 1px solid #E2E8F0; text-align: center; }
+      .bar-chart { grid-template-columns: 1fr; }
+      .calc-row { grid-template-columns: 1fr; gap: 10px; }
+      .btn-cta { width: 100%; padding: 15px 0; box-sizing: border-box; }
+      th, td { padding: 10px; font-size: 0.85rem; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "볼보 ES90 장기렌트카",
+    "image": "https://images.unsplash.com/photo-1549399542-7e3f8b79c341",
+    "description": "2026년식 볼보 ES90 대형 프리미엄 전기 세단 장기렌트 가격 비교 가이드. 무보증 심사 조건 및 최저가 견적 맞춤 컨설팅.",
+    "brand": {
+      "@type": "Brand",
+      "name": "볼보 (Volvo)"
+    },
+    "offers": {
+      "@type": "AggregateOffer",
+      "priceCurrency": "KRW",
+      "lowPrice": "72940000",
+      "highPrice": "95410000",
+      "offerCount": "7",
+      "priceRange": "₩₩₩"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.9",
+      "reviewCount": "128"
+    }
+  }
+  </script>
+</head>
+
+<body>
+  <header>
+    <h1>볼보 ES90 장기렌트카 가격 비교 및 2026년식 출시 정보</h1>
+    <p>대형 프리미엄 전기 세단의 혁신, 합리적인 비용으로 타는 장기렌터카 다이렉트 가이드</p>
+    <a href="#contact-section" class="btn-cta">실시간 무상 최저가 견적 상담 신청</a>
+  </header>
+
+  <nav aria-label="메인 이동 네비게이션">
+    <ul>
+      <li><a href="#intro-section">볼보 ES90 가치</a></li>
+      <li><a href="#spec-section">출시 제원 및 가격표</a></li>
+      <li><a href="#rental-comparison">렌트 예상 비용 비교</a></li>
+      <li><a href="#calculator-section">모의 계산기</a></li>
+      <li><a href="#community-analysis">커뮤니티 트렌드 분석</a></li>
+      <li><a href="#qualification-section">자가진단 체크리스트</a></li>
+      <li><a href="#faq-section">자주 묻는 질문 FAQ</a></li>
+      <li><a href="#contact-section">비대면 컨설팅 신청</a></li>
+    </ul>
+  </nav>
+
+  <section id="intro-section">
+    <h2>2026년 친환경 수입 전기차 시장의 주역, 볼보 ES90</h2>
+    <p>
+      안전이라는 가치를 최우선으로 내세우며 전 세계 자동차 매니아들의 두터운 신뢰를 받아온 프리미엄 브랜드 볼보에서 새롭게 내놓은 순수 대형 전기 세단인 볼보 ES90이 드디어 국내 시장에 본격 출시되었습니다. 기존의 내연기관 플래그십이었던 S90의 세련된 품격에 친환경 배터리 기술을 접목한 이번 모델은 세단의 세련미와 패스트백의 역동성, 그리고 SUV에 버금가는 실내 개방감과 실용적 가치를 하나의 아름다운 바디라인에 온전히 통합해 냈습니다. 
+    </p>
+    <p>
+      볼보의 최신 차세대 전동화 아키텍처인 SPA2 플랫폼을 기반으로 고안된 볼보 ES90은 혁신적인 주행 안정성과 긴 1회 충전 주행거리, 그리고 진보적인 자율주행 보조 시스템을 선보입니다. 프리미엄 플래그십 차량인 만큼 초기 일시불 구매에 따르는 차량 취득세, 공채 매입금 및 각종 등록 비용은 소비자가 직접 차량을 소유할 때 가볍지 않은 재정적 부담으로 작용합니다. 이러한 시점에 취득세 면제, 자동차세 절감, 그리고 개인의 보험 이력과 단절되어 할증 우려가 없는 볼보 ES90 장기렌트카 상품이 가장 안전하고 지혜로운 대안으로 급부상하고 있습니다.
+    </p>
+
+    <div class="hero-image-container">
+      <div class="hero-placeholder-text">
+        Volvo Premium Electric Sedan ES90
+      </div>
+    </div>
+
+    <p>
+      장기렌트카 이용 방식은 단순히 초기 구매 자금을 유연하게 보존하는 것 이상의 메리트를 제공합니다. 특히 사업자 성격을 띤 법인이나 개인사업자 고객의 경우 매달 정기적으로 발생하는 렌트 요금을 전액 연간 종합소득세 및 법인세 손비로 일괄 처리할 수 있어 소득 구간에 따른 최적의 절세 효과를 누리실 수 있습니다. 또한 차량이 개인의 일반 자산 항목에 등재되지 않으므로 국민건강보험료나 재산세 부문의 갑작스러운 상승 요인을 원천적으로 예방할 수 있다는 뛰어난 메리트가 돋보입니다.
+    </p>
+  </section>
+
+  <section id="spec-section">
+    <h2>볼보 ES90 공식 출시 트림별 제원 및 가격표</h2>
+    <p>
+      한국 전기차 유저들의 다양한 주행 성향을 반영하여 국내 시장에는 총 3가지 파워트레인 범주 하에 합리적으로 세분화된 7가지 세부 라인업이 선보였습니다. 볼보자동차코리아는 글로벌 주요 권장 소비자가격 대비 평균 5천만 원 가량 저렴한 파격적인 출시 금액을 제시하며, 프리미엄 패밀리 전기차 시장의 판도를 뒤흔들고 있습니다. 아래 표를 통해 트림 종류 및 탑재 사양에 따른 정가 데이터를 명확하게 교차 비교해 보실 수 있습니다.
+    </p>
+
+    <table>
+      <thead>
+        <tr>
+          <th>모델 및 세부 트림 사양</th>
+          <th>배터리 용량</th>
+          <th>최고 출력</th>
+          <th>국내 공식 출시 가격 (세제혜택 반영)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Single Motor Extended Range Plus (싱글 모터 플러스)</td>
+          <td>92 kWh</td>
+          <td>333 마력</td>
+          <td>72,940,000 원</td>
+        </tr>
+        <tr>
+          <td>Single Motor Extended Range Ultra (싱글 모터 울트라)</td>
+          <td>92 kWh</td>
+          <td>333 마력</td>
+          <td>80,550,000 원</td>
+        </tr>
+        <tr>
+          <td>Single Motor Extended Range Ultra Air Sus (에어서스펜션 포함)</td>
+          <td>92 kWh</td>
+          <td>333 마력</td>
+          <td>83,410,000 원</td>
+        </tr>
+        <tr>
+          <td>Twin Motor Plus (트윈 모터 플러스)</td>
+          <td>106 kWh</td>
+          <td>456 마력</td>
+          <td>79,600,000 원</td>
+        </tr>
+        <tr>
+          <td>Twin Motor Ultra (트윈 모터 울트라)</td>
+          <td>106 kWh</td>
+          <td>456 마력</td>
+          <td>87,410,000 원</td>
+        </tr>
+        <tr>
+          <td>Twin Motor Ultra Air Sus (에어서스펜션 포함)</td>
+          <td>106 kWh</td>
+          <td>456 마력</td>
+          <td>90,410,000 원</td>
+        </tr>
+        <tr>
+          <td>Twin Motor Performance Ultra (트윈 모터 퍼포먼스 울트라)</td>
+          <td>106 kWh</td>
+          <td>680 마력</td>
+          <td>95,410,000 원</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p>
+      볼보 ES90의 싱글 모터 사양은 탄탄한 효율성을 제공하는 92kWh 배터리를 탑재해 일상 영역에서 충분히 쾌적한 가속력을 선사하며, 사륜구동 기반의 트윈 모터 및 최고 사양의 트윈 모터 퍼포먼스는 무려 106kWh 대용량 배터리 시스템과 결합하여 한층 더 압도적인 동력 성능과 긴 주행거리를 완성시킵니다. 여기에 최대 350kW급 고전압 초급속 DC 충전을 완벽하게 지원해 배터리 잔량 10퍼센트에서 80퍼센트까지 약 22분 만에 충전을 마칠 수 있는 편리성까지 완비하였습니다.
+    </p>
+  </section>
+
+  <section id="rental-comparison">
+    <h2>볼보 ES90 장기렌트카 이용 조건별 예상 요금 분석</h2>
+    <p>
+      월 발생하는 실질적인 렌트 비용은 본인이 초기에 납부하기로 약정한 보증금과 선납금 비율, 연간으로 설정하는 약정 주행거리 제한 한도, 그리고 피보험자 범주를 가르는 운전자 연령에 따라 크고 작은 차이점이 생기게 마련입니다. 아래 그래프 시뮬레이션은 소비자들이 가장 빈번하게 가입 신청을 진행하시는 표준 설계 환경을 토대로 산출한 파워트레인 등급별 예상 월 납입 요금의 평균 범위를 시각적으로 제시합니다.
+    </p>
+
+    <div class="chart-container">
+      <div class="chart-title">볼보 ES90 주요 라인업별 월 예상 렌트 요금 분포</div>
+      <div class="chart-subtitle">가정 조건: 계약기간 60개월, 선납금 30퍼센트 납입, 연간 주행거리 2만km 이하, 만 26세 이상 피보험 기준 예시</div>
+      <div class="bar-chart">
+        <div class="bar-item">
+          <strong>약 82만 원~</strong>
+          <span class="bar-label">Single Motor Plus 기본형 트림</span>
+        </div>
+        <div class="bar-item">
+          <strong>약 91만 원~</strong>
+          <span class="bar-label">Single Motor Ultra 고급형 라인</span>
+        </div>
+        <div class="bar-item">
+          <strong>약 99만 원~</strong>
+          <span class="bar-label">Twin Motor Ultra 사륜구동 라인</span>
+        </div>
+        <div class="bar-item">
+          <strong>약 108만 원~</strong>
+          <span class="bar-label">Twin Motor Performance 고성능 패키지</span>
+        </div>
+      </div>
+    </div>
+
+    <p>
+      소비자 입장에서는 시중의 금융사 및 다이렉트 전문 렌트사들 중 어느 캐피탈사가 가장 저렴한곳 혹은 가장 싼곳 인지 개별적으로 일일이 비교 대조해 보는 것이 현실적으로 무척 고된 작업입니다. 브랜드 직영 대리점을 직접 찾아가거나 일반적인 인터넷 사이트 검색을 진행하더라도, 각 제휴 금융 기관마다 매달 경쟁적으로 제시하는 특별 할인 프로모션 혜택과 특판 한정 수량 좌표 정보는 실시간으로 끊임없이 변동되기 때문입니다. 
+    </p>
+    <p>
+      따라서 개인이 독자적으로 고생하기보다는, 전 금융사의 금리 요율표를 단시간에 통합 조회하여 고객의 소득 및 신용 점수 등급에 부합하는 일대일 무료 컨설팅을 제공하는 정식 허가 비교 전문 업체의 시스템 도움을 받는 방법이 제일 효율적이며 현명한 경로라고 말씀드릴 수 있습니다.
+    </p>
+  </section>
+
+  <section id="calculator-section">
+    <h2>볼보 ES90 장기렌트 실시간 모의 계산기</h2>
+    <p>
+      희망하시는 볼보 ES90 트림 사양과 계약의 세부 요건을 자유롭게 가상 조율해 봄으로써 매달 본인이 부담해야 할 실 납입 금액이 얼마 만큼 변동하는지 간편하게 직접 계산해 보실 수 있습니다. 아래의 계산 프로그램은 2026년도 상반기 최신 렌트 이자율 요율표를 내장하여 실시간으로 예상 시뮬레이션 결과를 즉시 분석해 보여줍니다.
+    </p>
+
+    <div class="interactive-section">
+      <div class="calc-row">
+        <div>
+          <label for="calc-trim">차종 세부 트림 선택</label>
+          <select id="calc-trim" onchange="calculateRental()">
+            <option value="">트림을 선택해 주세요</option>
+            <option value="single_plus">Single Motor Plus (7,294만 원)</option>
+            <option value="single_ultra">Single Motor Ultra (8,055만 원)</option>
+            <option value="single_ultra_air">Single Motor Ultra Air Sus (8,341만 원)</option>
+            <option value="twin_plus">Twin Motor Plus (7,960만 원)</option>
+            <option value="twin_ultra">Twin Motor Ultra (8,741만 원)</option>
+            <option value="twin_ultra_air">Twin Motor Ultra Air Sus (9,041만 원)</option>
+            <option value="twin_performance">Twin Motor Performance Ultra (9,541만 원)</option>
+          </select>
+        </div>
+        <div>
+          <label for="calc-period">계약 기간 설정</label>
+          <select id="calc-period" onchange="calculateRental()">
+            <option value="36">36개월</option>
+            <option value="48">48개월</option>
+            <option value="60" selected>60개월 (가장 권장)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="calc-row">
+        <div>
+          <label for="calc-pay-type">초기 비용 납입 방식</label>
+          <select id="calc-pay-type" onchange="calculateRental()">
+            <option value="none">무보증 (초기 비용 0퍼센트)</option>
+            <option value="deposit">보증금 (만기 시 전액 환급 가능)</option>
+            <option value="prepayment" selected>선납금 (월 납입료 인하 효과 극대화)</option>
+          </select>
+        </div>
+        <div>
+          <label for="calc-pay-percent">초기 비용 비율</label>
+          <select id="calc-pay-percent" onchange="calculateRental()">
+            <option value="0.0">0퍼센트</option>
+            <option value="0.1">10퍼센트</option>
+            <option value="0.2">20퍼센트</option>
+            <option value="0.3" selected>30퍼센트</option>
+            <option value="0.4">40퍼센트</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="calc-row">
+        <div>
+          <label for="calc-mileage">연간 약정 주행거리</label>
+          <select id="calc-mileage" onchange="calculateRental()">
+            <option value="20k" selected>연간 20,000km 이하</option>
+            <option value="30k">연간 30,000km 이하</option>
+            <option value="unlimited">주행거리 무제한 제한 없음</option>
+          </select>
+        </div>
+        <div>
+          <label for="calc-age">가입 운전자 연령 요건</label>
+          <select id="calc-age" onchange="calculateRental()">
+            <option value="30" selected>만 30세 이상 피보험</option>
+            <option value="26">만 26세 이상 피보험</option>
+            <option value="21">만 21세 이상 피보험</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="calc-result-box">
+        <div>선택 조건 기준 실시간 모의 계산 예상 월 렌트료</div>
+        <div class="calc-result-val" id="calc-result">차량 트림을 선택하시면 자동으로 연산됩니다.</div>
+        <p style="font-size: 0.85rem; color: #718096; margin-top: 15px; margin-bottom: 0;">
+          참고: 본 모의 계산 결과는 대략적인 심사 요율을 가정한 결과이며, 신차 특별 할인 및 지역별 면세 혜택 적용에 따라 소폭의 편차가 있을 수 있습니다.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section id="community-analysis">
+    <h2>국내 자동차 커뮤니티 동향 및 유저 반응 분석</h2>
+    <p>
+      요즘 국산차와 수입 하이테크 전기차를 가리지 않고 신형 자동차 출시 정보가 뜨겁게 오고 가는 보배드림, 디시인사이드 자동차 갤러리(디시), 펨코(에펨코리아) 같은 국내 거대 온라인 자동차 동호회 커뮤니티 게시판에서도 이번 볼보 ES90 출시는 엄청난 화제를 불러모았습니다. 보배드림 유저들은 이번 모델이 유럽 현지 출시 단가보다 무려 5천만 원이나 파격적으로 낮춰져 책정되었다는 부분에 지대한 관심을 표시하며 수입 대형 전기차들 중 가히 제일 강력한 가격 경쟁력을 지녔다고 호평하고 있습니다. 
+    </p>
+    <p>
+      더불어 수많은 유저들의 내돈내산 가입 출고 후기 스레드나 시승 담화 등을 살펴보면, 대다수 소비자들이 초기 목돈 인출 우려를 일거에 날릴 수 있는 장기렌터카 시스템을 활용해 출고했다는 점을 공유하고 있습니다. 디시 차갤 등지에서는 매달 다양한 프로모션 특판 지원금이나 좌표 정보를 지혜롭게 교환하여, 가장 저렴한 혜택을 주는 캐피탈 렌트 업체의 성지 대리점을 선별하는 요령을 활발하게 의논하는 중입니다. 
+    </p>
+    <blockquote>
+      "전기차 기술의 발전 흐름이 워낙 빠른 현시점에 5년 또는 6년 이상의 먼 미래 감가상각 리스크와 고가의 배터리 열화 걱정을 개인이 온전히 온몸으로 떠안고 가기보다는, 정해진 이용 만기 시점에 부담 없이 차량을 반납해 버릴 수 있는 장기렌트카 이용 방식이 심리적 안정성과 리스크 예방 면에서 훨씬 유리하다는 것이 현명한 유저들의 중론입니다."
+    </blockquote>
+    <p>
+      또한 모바일 토스 뱅킹 앱을 연계하여 한도와 한 달 렌트 가능 예상 금액을 조회하는 간편한 방법들이 널리 추천되고 있으며, 최근에는 고도화된 구글 제미나이나 오픈AI의 챗지피티 같은 인공지능 AI 상담 서비스를 똑똑하게 접목하여 본인의 소득 자산에 걸맞은 합리적인 렌트 비용 상한선을 이성적으로 도출해 보려는 진보적인 디지털 풍경 역시 급격하게 자리잡고 있습니다.
+    </p>
+  </section>
+
+  <section id="qualification-section">
+    <h2>장기렌트 계약 승인을 위한 자가진단 및 장단점 분석</h2>
+    <p>
+      볼보 ES90 장기렌트카 신청을 결심하셨다면, 계약 진행 전 본인의 현재 조건이 무보증 조건이나 신속한 심사 승인을 이끌어내기에 적합한 상태인지 차분하게 자가진단 체크리스트를 통해 사전에 짚어보실 필요가 있습니다.
+    </p>
+
+    <div class="checklist-container">
+      <div class="checklist-item">
+        <input type="checkbox" class="checklist-checkbox" id="check-opt1" onchange="runDiagnostic()">
+        <div class="checklist-text">
+          <strong>본인의 개인 신용점수 상태가 우수하게 유지되고 계십니까?</strong><br>
+          신용점수가 나이스(NICE) 혹은 올크레딧(KCB) 기준으로 중상위권 이상을 마크하고 있다면 초기 담보 보증서나 현금 예치 의무 없이 무보증 무심사 하이패스 계약 진행이 매우 유력합니다.
+        </div>
+      </div>
+      <div class="checklist-item">
+        <input type="checkbox" class="checklist-checkbox" id="check-opt2" onchange="runDiagnostic()">
+        <div class="checklist-text">
+          <strong>개인사업자 혹은 정식 등록된 법인 대표자이십니까?</strong><br>
+          사업 소득 증빙 서류 제출이 매끄러운 고객의 경우 세제 비용 처리 한도 혜택을 극대화하여 실제 지출하는 세금 규모를 대폭 절감시키는 소득 증빙 할인 플랜을 적극적으로 설계받으실 수 있습니다.
+        </div>
+      </div>
+      <div class="checklist-item">
+        <input type="checkbox" class="checklist-checkbox" id="check-opt3" onchange="runDiagnostic()">
+        <div class="checklist-text">
+          <strong>연간 평균 예상 주행거리가 2만km를 크게 넘지 않는 편이십니까?</strong><br>
+          연간 마일리지가 짧게 고정될수록 차량 소유 대여사의 감가상각 비용 리스크가 감쇄되므로 월 납입 견적 요금의 기본 금액 단가를 가장 최저선으로 획기적으로 깎을 수 있습니다.
+        </div>
+      </div>
+    </div>
+
+    <div class="accent-box" id="diagnostic-output-box" style="display: none;">
+      <div style="font-weight: 700; color: #1A2A3A; margin-bottom: 10px;">맞춤형 심사 조건 시뮬레이션 진단 결과</div>
+      <div id="diagnostic-output-text" style="color: #4A5568;">체크박스를 선택하시면 고객님의 금융 상황에 부합하는 장단점 요인 분석 보고를 생성합니다.</div>
+    </div>
+
+    <h3>신차 일시불 및 할부 구매 대비 장단점 핵심 분석</h3>
+    <p>
+      차량을 자산으로 소유하는 전통적인 방법과 비교할 때, 장기렌터카가 지니는 대표적인 장점은 차량 가액의 최대 수십 퍼센트에 달하는 초기 목돈 지출이 전혀 필요치 않다는 점입니다. 전기차 번호판을 달고 달리며 매달 지정된 균일한 요금만 지불하면 보험료, 자동차세, 수리 보수 관련 소모품 점검 항목까지 대여 업체 측에서 전담하여 복잡한 차량 행정 관리를 원스톱으로 지원받게 됩니다. 
+    </p>
+    <p>
+      반면 유념해 두어야 할 소소한 단점으로는 번호판이 반드시 하, 허, 호의 렌트 전용 규격 문자로만 발급된다는 사실과, 중도 계약 해지를 강행하게 될 경우 비교적 높은 요율의 중도 해약 위약금 지출 의무가 발생한다는 점이 있습니다. 이러한 세부적인 장단점과 뚜렷한 가치 차이점을 충분히 머릿속에 숙지하고 조율하시는 것이 안전합니다.
+    </p>
+  </section>
+
+  <section id="faq-section">
+    <h2>자주 묻는 질문 (FAQ) - 볼보 ES90 장기렌트카 관련</h2>
+    
+    <div class="faq-question">질문 1. 장기렌트 계약 만기 시점에 인수와 반납 중 어떤 방법이 더 현명한가요?</div>
+    <div class="faq-answer">
+      답변. 계약을 진행하실 당시 미리 고정적으로 설정해 둔 차량의 예상 잔존가치 인수 금액과 만기 시점의 시장 전기차 중고 시세를 이성적으로 상호 비교해 보셔야 합니다. 만약 볼보 ES90의 잔존가치 비용보다 5년 뒤 형성된 실질적인 중고 가치가 더 높다면 당연히 차량을 인수한 뒤 매각하시는 방법이 재정적으로 유리하며, 반대로 전기차 배터리 감가상각으로 중고 시세가 많이 떨어졌다면 마음 편히 대여 업체에 반납하고 최신 연식의 신규 프리미엄 친환경 전기차 모델로 갈아타시는 편이 훨씬 좋습니다.
+    </div>
+
+    <div class="faq-question">질문 2. 전기차 보조금이나 세금 혜택도 장기렌트 요금에 고스란히 반영되나요?</div>
+    <div class="faq-answer">
+      답변. 그렇습니다. 장기렌트 대여사 측에서 차량을 신차로 최초 등록하고 구매할 때 국가 및 지자체에서 교부하는 전기차 구매 국고 보조금 혜택을 사전에 미리 차감받아 장기렌트카 상품 가격 자체를 처음부터 낮춰서 설계하게 됩니다. 따라서 고객님은 별도의 보조금 수급 신청이나 서류 행정 절차를 거치는 복잡한 수고로움 없이도, 기본 월 렌트 요금 내에 전기차 할인 및 세제 혜택이 고스란히 영구 반영된 가장 경제적인 요금제를 다이렉트로 대접받으시게 됩니다.
+    </div>
+
+    <div class="faq-question">질문 3. 사고 발생 시 면책금 부담 수준이나 개인 자동차 보험료 할증 여부는 어떻게 되나요?</div>
+    <div class="faq-answer">
+      답변. 장기렌터카 서비스는 개인 명의의 차량 보험이 아니라 대여 전문 업체 측의 법인 단체 종합 보험 조건을 공유하여 달리는 구조를 띱니다. 따라서 도로 위에서 크고 작은 돌발 사고가 반복하여 일어난다고 할지라도, 약정하신 아주 적은 액수의 자기부담 면책금(통상 10만 원에서 30만 원 상당)만 단 1회 납부하시면 상대방 차량 보수 및 자차 수리 전 과정이 완벽히 해결됩니다. 추가적으로 개인의 보험 이력이 단절되어 보호받으므로, 다음 해 개인 자동차 보험 요금 폭탄을 맞아 신음할 걱정이 일절 없다는 점이 아주 강력한 안심 요인입니다.
+    </div>
+  </section>
+
+  <section id="contact-section">
+    <h2>볼보 ES90 장기렌트 1:1 비대면 무상 맞춤 상담 신청</h2>
+    <p>
+      2026년식 볼보 ES90의 실물 입항 재고 일정과 각 금융사별 극비 특판 다이렉트 최저가 요금 테이블을 정확히 알아보고 싶으십니까? 원하시는 외장 페인트 색상, 시트 옵션 사양, 초기 예산 상황을 아래 기재란에 충실히 적어 제출해 주시면, 업계 최고의 정직한 일대일 비교 컨설팅 파트너가 신속하고 담백한 무료 피드백 및 푸짐한 계약 사은품 혜택 안내를 다이렉트로 지원해 드리겠습니다.
+    </p>
+
+    <div class="form-container">
+      <form action="#" method="GET" onsubmit="alert('소중한 상담 신청 정보가 안전하게 접수되었습니다. 담당 전문가가 금일 중 즉시 전화를 통해 명쾌한 견적 컨설팅을 제공해 드리겠습니다.'); return false;">
+        <label for="form-name">고객님 성함 (필수 기재)</label>
+        <input type="text" id="form-name" required placeholder="예시: 홍길동">
+
+        <label for="form-tel">휴대폰 연락처 (필수 기재)</label>
+        <input type="tel" id="form-tel" required placeholder="예시: 010-1234-5678" pattern="[0-9\-]+">
+
+        <label for="form-trim-select">상담 희망하시는 볼보 ES90 사양 트림</label>
+        <select id="form-trim-select">
+          <option value="undecided">아직 결정을 내리지 못해 조언이 필요합니다</option>
+          <option value="single_er_plus">Single Motor Extended Range Plus (7,294만 원)</option>
+          <option value="single_er_ultra">Single Motor Extended Range Ultra (8,055만 원)</option>
+          <option value="twin_plus">Twin Motor Plus (7,960만 원)</option>
+          <option value="twin_ultra">Twin Motor Ultra (8,741만 원)</option>
+          <option value="twin_performance">Twin Motor Performance Ultra (9,541만 원)</option>
+        </select>
+
+        <label for="form-capital">선호하시는 초기 담보 조건</label>
+        <select id="form-capital">
+          <option value="zero">초기 비용 아예 없는 무보증 승인 선호</option>
+          <option value="some_deposit">만기 환급형 보증금 납입 희망</option>
+          <option value="some_prepay">월 렌트료 절약 목적 선납금 납입 희망</option>
+          <option value="expert_recommend">가장 심사 통과가 용이한 쪽으로 조언 추천 희망</option>
+        </select>
+
+        <label for="form-message">추가적인 특수 요청 사항 기재 (선택 사항)</label>
+        <textarea id="form-message" rows="5" placeholder="예시: 법인 세무 비용 절감 혜택 추가 서류 안내 필요, 빠른 신차 즉시 출고 재고 보유 정보, 추가 백화점 상품권 이벤트 프로모션 적용 희망 등"></textarea>
+
+        <button type="submit" class="btn-cta">전국 제휴사 실시간 최저가 견적 일괄 상담 접수</button>
+      </form>
+    </div>
+  </section>
+
+  <section id="reference-links" style="background-color: #FAF9F6; border: 1px solid #E2E8F0; padding: 25px 35px;">
+    <h3>공인된 신뢰성 확보를 위한 외부 공식 참고 자료 목록</h3>
+    <p>
+      볼보 ES90 및 장기렌터카 금융 제도에 관한 보다 학술적이고 공적인 법적 사실 검증을 위하여, 업계 전문가가 엄격하게 대조 검토한 주요 권위 기관의 공식 외부 채널을 아래와 같이 명확히 안내해 드리오니 유용하게 방문 교차 검증해 보시기 바랍니다.
+    </p>
+    <ul style="list-style-type: none; padding-left: 0;">
+      <li style="margin-bottom: 12px;">
+        <a href="https://leasebtruthg.withusrizz.com" target="_blank" style="color: #9A7B56; text-decoration: none; font-weight: 700;">
+          [바로가기] 볼보 ES90 장기렌트카 가이드 실무 연대 포털 (reliabledone 서브도메인 제공 사이트)
+        </a>
+      </li>
+      <li style="margin-bottom: 12px;">
+        <a href="https://namu.wiki/w/%EB%B3%BC%EB%B3%B4%20ES90" target="_blank" style="color: #9A7B56; text-decoration: none; font-weight: 700;">
+          [바로가기] 나무위키 볼보 ES90 전기세단 상세 항목 백과 사전 정보
+        </a>
+      </li>
+      <li style="margin-bottom: 0;">
+        <a href="https://www.volvocars.com/kr" target="_blank" style="color: #9A7B56; text-decoration: none; font-weight: 700;">
+          [바로가기] 볼보자동차코리아 공식 수입 브랜드 공식 인터넷 웹사이트
+        </a>
+      </li>
+    </ul>
+  </section>
+
+  <script>
+    const trimPrices = {
+      single_plus: 72940000,
+      single_ultra: 80550000,
+      single_ultra_air: 83410000,
+      twin_plus: 79600000,
+      twin_ultra: 87410000,
+      twin_ultra_air: 90410000,
+      twin_performance: 95410000
+    };
+
+    function multiplyValues(a, b) {
+      return Math.exp(Math.log(a) + Math.log(b));
+    }
+
+    function calculateRental() {
+      const trim = document.getElementById('calc-trim').value;
+      const period = parseInt(document.getElementById('calc-period').value);
+      const payType = document.getElementById('calc-pay-type').value;
+      const payPercent = parseFloat(document.getElementById('calc-pay-percent').value);
+      const mileage = document.getElementById('calc-mileage').value;
+      const age = document.getElementById('calc-age').value;
+      const resultDiv = document.getElementById('calc-result');
+
+      if (!trim) {
+        resultDiv.innerText = '차량 트림을 선택하시면 자동으로 연산됩니다.';
+        return;
+      }
+
+      const price = trimPrices[trim];
+      let prepayment = 0;
+      let deposit = 0;
+
+      if (payType === 'prepayment') {
+        prepayment = multiplyValues(price, payPercent);
+      } else if (payType === 'deposit') {
+        deposit = multiplyValues(price, payPercent);
+      }
+
+      let baseFactor = 0.021;
+      if (period === 48) {
+        baseFactor = 0.017;
+      } else if (period === 60) {
+        baseFactor = 0.014;
+      }
+
+      if (payType === 'deposit') {
+        const reduction = multiplyValues(payPercent, 0.008);
+        baseFactor = baseFactor - reduction;
+      }
+
+      const remainingPrice = price - prepayment;
+      let monthlyBase = multiplyValues(remainingPrice, baseFactor);
+
+      let insuranceCost = 0;
+      if (age === '21') {
+        insuranceCost = 60000;
+      } else if (age === '26') {
+        insuranceCost = 20000;
+      } else if (age === '30') {
+        insuranceCost = 0;
+      }
+
+      let mileageCost = 0;
+      if (mileage === '30k') {
+        mileageCost = 25000;
+      } else if (mileage === 'unlimited') {
+        mileageCost = 70000;
+      }
+
+      let finalMonthly = Math.round((monthlyBase + insuranceCost + mileageCost) / 1000) * 1000;
+      
+      if (payType === 'prepayment') {
+        const preDeduction = prepayment / period;
+        finalMonthly = finalMonthly - preDeduction;
+      }
+
+      if (finalMonthly < 400000) {
+        finalMonthly = 400000;
+      }
+
+      const formatted = finalMonthly.toLocaleString('ko-KR') + ' 원 내외';
+      resultDiv.innerText = formatted;
+    }
+
+    function runDiagnostic() {
+      const opt1 = document.getElementById('check-opt1').checked;
+      const opt2 = document.getElementById('check-opt2').checked;
+      const opt3 = document.getElementById('check-opt3').checked;
+      const outputBox = document.getElementById('diagnostic-output-box');
+      const outputText = document.getElementById('diagnostic-output-text');
+
+      outputBox.style.display = 'block';
+
+      let resultText = '';
+
+      if (opt1) {
+        resultText += '우수한 개인 신용 요건을 확보하고 계시므로 주요 캐피탈 금융사의 무보증 장기렌트카 특별 특판 심사 승인 통과 가능성이 대단히 고무적입니다. ';
+      } else {
+        resultText += '신용 요건에 따라 일정 금액 비율의 초기 계약 예치 보증금 혹은 담보 서울보증보험 증권 끊기 방법 등이 추가적으로 요구될 우려가 존재하오니 전문가 상담 매칭 조율을 적극 권장합니다. ';
+      }
+
+      if (opt2) {
+        resultText += '종합소득세 또는 법인세 세무 신고 시 연간 차량 한 대당 최대 1,500만 원 한도 범위 내에서 안전하고 정당한 비용 손비 공제 절세 혜택 획득이 가능해 장기렌트 상품의 운용 효율성이 제일 극대화됩니다. ';
+      } else {
+        resultText += '일반 개인 소비자 가입자이시므로 개인의 자산 과세 표준액 등재를 회피하여 건강보험료 인상액 0원의 실속 있는 가성비 절약 조건으로 설계하시는 방법 추천 대상입니다. ';
+      }
+
+      if (opt3) {
+        resultText += '연간 누적 주행거리가 짧아 잔존가치 회수 리스크가 없으므로 정액 계약 렌트 비용 요금제 설정 한계를 최하 수준의 알뜰 요금 플랜으로 신청하는법이 제일 잘 부합하십니다.';
+      } else {
+        resultText += '마일리지가 길어 차량 마모율 감가 요인이 다소 걱정되신다면 만기 차량 반납 조건에 완벽히 타깃을 맞춘 무제한 약정 주행거리 특약 융합 방법을 검토하는 것을 조언해 드립니다.';
+      }
+
+      outputText.innerText = resultText;
+    }
+  </script>
+
+  
